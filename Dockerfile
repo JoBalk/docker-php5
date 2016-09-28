@@ -11,9 +11,10 @@ COPY etc /etc
 RUN chmod -R 755 /etc/service
 
 RUN mkdir /run/mysqld && chmod -R 777 /run/mysqld
-RUN a2enmod rewrite ; a2dismod php7.0 ; a2enmod php5.6
+RUN a2enmod rewrite ; a2dismod php7.0 ; a2enmod php5.6 ; a2ensite default-ssl ; a2enmod ssl
 RUN rm -f /var/www/html/index.html
 
 EXPOSE 80
+EXPOSE 443
 VOLUME /var/www/html
 CMD ["/sbin/my_init"]
