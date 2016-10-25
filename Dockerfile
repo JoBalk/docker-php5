@@ -20,8 +20,6 @@ RUN composer self-update
 
 RUN npm install -g uglify-js less uglifycss
 
-RUN export TERM=xterm
-
 EXPOSE 80
 EXPOSE 443
 VOLUME /var/www/html
