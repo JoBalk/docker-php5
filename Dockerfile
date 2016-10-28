@@ -12,6 +12,7 @@ RUN chmod -R 755 /etc/service
 
 RUN mkdir /run/mysqld && chmod -R 777 /run/mysqld
 RUN a2enmod rewrite ; a2dismod php7.0 ; a2enmod php5.6 ; a2ensite default-ssl ; a2enmod ssl
+RUN phpdismod -s cli xdebug 
 RUN rm -f /var/www/html/index.html
 
 ADD composer-setup.php /tmp/
@@ -19,6 +20,9 @@ RUN php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN composer self-update
 
 RUN npm install -g uglify-js less uglifycss
+
+RUN ln -s /usr/local/lib/node_modules/less /usr/local/bin/less
+RUN ln -s /usr/bin/nodejs /usr/local/bin/node
 
 EXPOSE 80
 EXPOSE 443
